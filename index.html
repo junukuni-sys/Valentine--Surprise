@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Special Message</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            background-color: #ffebee;
+            overflow: hidden;
+        }
+        h1 { color: #d32f2f; text-align: center; }
+        .buttons { position: relative; width: 300px; height: 100px; }
+        button {
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            border-radius: 10px;
+            border: none;
+            transition: all 0.2s;
+        }
+        #yesBtn { background-color: #4caf50; color: white; }
+        #noBtn {
+            background-color: #f44336;
+            color: white;
+            position: absolute;
+            left: 160px;
+        }
+        /* Rose Effect Container */
+        .rose {
+            position: fixed;
+            top: -50px;
+            font-size: 2rem;
+            animation: fall linear forwards;
+        }
+        @keyframes fall {
+            to { transform: translateY(110vh) rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+
+    <h1 id="question">Will you be my Valentine? ❤️</h1>
+    
+    <div class="buttons">
+        <button id="yesBtn">Yes</button>
+        <button id="noBtn">No</button>
+    </div>
+
+    <script>
+        const noBtn = document.getElementById('noBtn');
+        const yesBtn = document.getElementById('yesBtn');
+        const question = document.getElementById('question');
+
+        // The "Runaway" logic
+        noBtn.addEventListener('mouseover', () => {
+            const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
+            const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
+            noBtn.style.position = 'fixed';
+            noBtn.style.left = x + 'px';
+            noBtn.style.top = y + 'px';
+        });
+
+        // The "Yes" logic
+        yesBtn.addEventListener('click', () => {
+            question.innerText = "Your husband is happy! 🌹";
+            noBtn.style.display = 'none';
+            startRoses();
+        });
+
+        function startRoses() {
+            for (let i = 0; i < 50; i++) {
+                setTimeout(() => {
+                    const rose = document.createElement('div');
+                    rose.classList.add('rose');
+                    rose.innerText = '🌹';
+                    rose.style.left = Math.random() * 100 + 'vw';
+                    rose.style.animationDuration = (Math.random() * 2 + 3) + 's';
+                    document.body.appendChild(rose);
+                }, i * 100);
+            }
+        }
+    </script>
+</body>
+</html>
