@@ -140,7 +140,7 @@
         </div>
     </div>
 
-    <div id="successScreen">
+   <div id="successScreen">
         <div class="cupid-container">
             <svg viewBox="0 0 200 150" width="250" height="150">
                 <text x="10" y="100" font-size="70">👼</text>
@@ -151,7 +151,7 @@
                 </g>
             </svg>
         </div>
-        <h1 style="font-size: 2.2rem; color: #f72585; margin-top: 0;">Happy Valentines Day my world !</h1>
+        <h1 style="font-size: 2.2rem; color: #f72585; margin-top: 0;">Your husband is the happiest man alive!</h1>
         <p style="color: #f72585; font-size: 1.3rem; font-weight: bold;">I love you forever! 🌹</p>
     </div>
 
@@ -213,4 +213,28 @@
 
         // 4. Rose Shower Effect
         function spawnRoses() {
-            for (let
+            for (let i = 0; i < 80; i++) {
+                setTimeout(() => {
+                    const rose = document.createElement('div');
+                    rose.innerHTML = '🌹';
+                    rose.className = 'rose-effect';
+                    rose.style.left = Math.random() * 100 + 'vw';
+                    rose.style.top = '-50px';
+                    rose.style.fontSize = (Math.random() * 20 + 20) + 'px';
+                    
+                    const fallAnimation = rose.animate([
+                        { transform: 'translateY(0) rotate(0deg)', opacity: 1 },
+                        { transform: `translateY(110vh) rotate(${Math.random() * 360}deg)`, opacity: 0 }
+                    ], {
+                        duration: Math.random() * 2000 + 3000,
+                        easing: 'linear'
+                    });
+
+                    document.body.appendChild(rose);
+                    fallAnimation.onfinish = () => rose.remove();
+                }, i * 150);
+            }
+        }
+    </script>
+</body>
+</html>
